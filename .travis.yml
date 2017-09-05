@@ -7,7 +7,7 @@ services:
   - mysql
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=eris_hub.settings
+  - export DJANGO_SETTINGS_MODULE=eris_hub.settings.travis
   - export PIP_USE_MIRRORS=true
   - sudo apt-get install python3-dev libmysqlclient-dev
 
