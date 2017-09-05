@@ -1,0 +1,20 @@
+language: python
+
+python:
+  - 3.6
+
+services:
+  - mysql
+
+before_install:
+  - export DJANGO_SETTINGS_MODULE=eris_hub.settings
+  - export PIP_USE_MIRRORS=true
+
+install:
+  - pip install -r requirements.txt
+
+before_script:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS eris_test;'
+
+script:
+  - python manage.py syncdb --noinput
