@@ -1,18 +1,16 @@
-from django.shortcuts import get_object_or_404, redirect, reverse
-from django.urls import reverse
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.shortcuts import redirect
+from django.views.generic import CreateView, DetailView, UpdateView, FormView
 from django.views.decorators.debug import sensitive_post_parameters
 from django.utils.decorators import method_decorator
-from typing import Dict
 
-from .models import User
 from .forms import RegistrationForm
 
 
 class UserRegistration(CreateView):
-    model = User
+    """
+    /users/register/
+    """
     form_class = RegistrationForm
-    # TODO: redirect to main page
     disallowed_url = None
     template_name = "registration/registration.html"
 
@@ -31,3 +29,19 @@ class UserRegistration(CreateView):
 
     def registration_allowed(self):
         return self.request.user.is_anonymous
+
+
+class UserSettings(DetailView):
+    pass
+
+
+class UserSettingEdit(UpdateView):
+    pass
+
+
+class UserLogin(FormView):
+    pass
+
+
+class UserLogout(FormView):
+    pass

@@ -101,7 +101,7 @@ class PlayerNoteDetail(MixinView, DetailView):
         }
 
 
-class PlayerNotesCreate(CreateView):
+class PlayerNotesCreate(MixinView, CreateView):
     form_class = NoteCreateForm
     template_name = "players/note_create.html"
     permission_class = IsAdmin
@@ -121,15 +121,13 @@ class PlayerNotesCreate(CreateView):
         return super(PlayerNotesCreate, self).form_valid(form)
 
 
-class AdminsList(ListView):
-    model = Player
-    template_name = None
+class AdminsList(MixinView, ListView):
+    template_name = "players/admins.html"
 
     def get_queryset(self):
-        return self.model.objects.filter(admin=True)
+        return Player.objects.filter(admin=True)
 
-    def get_context_data(self, **kwargs) -> Dict:
-        context = {
+    def _get_common_context(self) -> Dict:
+        return {
             'admins': self.get_queryset()
         }
-        return context

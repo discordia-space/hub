@@ -24,6 +24,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^bans/', include('bans.urls')),
     url(r'^players/', include('players.urls')),
-    # url('^', include('django.contrib.auth.urls')),
     url(r'^register/', UserRegistration.as_view())
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
