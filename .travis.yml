@@ -7,8 +7,9 @@ services:
   - mysql
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=eris_hub.settings
+  - export DJANGO_SETTINGS_MODULE=eris_hub.settings.travis
   - export PIP_USE_MIRRORS=true
+  - sudo apt-get install python3-dev libmysqlclient-dev
 
 install:
   - pip install -r requirements.txt
@@ -17,4 +18,6 @@ before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS eris_test;'
 
 script:
-  - python manage.py syncdb --noinput
+  - python manage.py makemigrations
+  - python manage.py migrate
+  - python manage.py test
